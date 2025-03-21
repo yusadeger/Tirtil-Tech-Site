@@ -92,7 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 sliderContainer.style.animation = 'none';
                 sliderContainer.style.transform = 'translateX(0)';
                 requestAnimationFrame(() => {
-                    sliderContainer.style.animation = 'slide 20s linear infinite';
+                    sliderContainer.style.animation = 'slide 10s linear infinite';
                     isResetting = false;
                 });
             });
