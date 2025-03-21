@@ -385,17 +385,45 @@
     box-shadow: 0 12px 30px rgba(26, 171, 0, 0.1);
 }
 
-/* Tabs */
-.tab-content {
-    display: none;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.tab-content.active {
-    display: block;
+/* Tab içerikleri için kutu stili */
+.tab-content p {
+    transition: all 0.3s ease;
+    transform: translateY(0);
     opacity: 1;
-}
+    max-width: 100%;
+    box-sizing: border-box; /* Padding ve border'ın genişliğe dahil edilmesi */
+  }
+  
+  /* Aktif tab içeriği için animasyon */
+  .tab-content.active p {
+    animation: fadeInUp 0.5s ease forwards;
+  }
+  
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Hover efekti */
+  .tab-content p:hover {
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    transform: translateY(-5px);
+    border-color: #22c55e;
+  }
+  
+  /* Mobil uyumluluk */
+  @media (max-width: 768px) {
+    .tab-content p {
+      padding: 1rem;
+      font-size: 1rem;
+    }
+  }
 
 /* Loading Animation */
 .loading-overlay {
