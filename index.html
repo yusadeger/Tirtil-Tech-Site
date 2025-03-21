@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <link rel="icon" sizes="32x32" href="resimler/tirtil.png" type="image/png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tırtıl Tech</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+          const segmentCount = 5;
+          const positions = [];
+          let angle = 0;
+          const segments = [];
+          const radius = 25;
+          
+          const startX = radius;
+          const startY = -40; // Daha yukarı alındı
+          
+          const face = document.getElementById("face-group");
+          
+          for (let i = 0; i < segmentCount; i++) {
+            const circle = document.getElementById(`seg${i}`);
+            circle.setAttribute("cx", startX);
+            circle.setAttribute("cy", startY);
+            segments.push(circle);
+          }
+  
+          function animate() {
+            const headX = radius * Math.cos(angle);
+            const headY = startY + radius * Math.sin(angle); // Y koordinatı yukarıdan başlıyor
+            angle += 0.05;
+            positions.unshift({ x: headX, y: headY });
+            
+            if (positions.length > segmentCount * 15) {
+              positions.pop();
+            }
+            
+            if (positions[0]) {
+              segments[0].setAttribute("cx", positions[0].x);
+              segments[0].setAttribute("cy", positions[0].y);
+              face.setAttribute("transform", `translate(${positions[0].x},${positions[0].y})`);
+            }
+            
+            for (let i = 1; i < segments.length; i++) {
+              const offset = 15 + (i-1) * 8;
+              if (positions[offset]) {
+                segments[i].setAttribute("cx", positions[offset].x);
+                segments[i].setAttribute("cy", positions[offset].y);
+              }
+            }
+            
+            requestAnimationFrame(animate);
+          }
+          
+          animate();
+        });
+    </script>
+</head>
+<body class="bg-gray-50">
+   <div class="loading-overlay">
+    <div class="loading-animation">
+<svg id="svg" xmlns="http://www.w3.org/2000/svg" viewBox="-100 -120 200 200">
+  
+  <!-- Tırtıl segmentleri -->
+  <circle id="seg0" cx="25" cy="-40" r="10" fill="#b8ff75" stroke="#333" stroke-width="2"/>
+  <circle id="seg1" cx="25" cy="-40" r="8" fill="#b8ff75" stroke="#333" stroke-width="2"/>
+  <circle id="seg2" cx="25" cy="-40" r="8" fill="#b8ff75" stroke="#333" stroke-width="2"/>
+  <circle id="seg3" cx="25" cy="-40" r="8" fill="#b8ff75" stroke="#333" stroke-width="2"/>
+  <circle id="seg4" cx="25" cy="-40" r="8" fill="#b8ff75" stroke="#333" stroke-width="2"/>
+
+  <!-- Yüz grubu -->
+  <g id="face-group" transform="translate(0,-40)">
+    <circle cx="-3" cy="-3" r="2" fill="#333"/>
+    <circle cx="3" cy="-3" r="2" fill="#333"/>
+    <path d="M-2 2 Q0 4 2 2" fill="none" stroke="#333" stroke-width="1.5" stroke-linecap="round"/>
+    <path d="M-6 -6 Q-9 -9 -10 -8" fill="none" stroke="#333" stroke-width="1.5" stroke-linecap="round"/>
+    <path d="M6 -6 Q9 -9 10 -8" fill="none" stroke="#333" stroke-width="1.5" stroke-linecap="round"/>
+  </g>
+</svg>
+    </div>
+    <!-- Navigation -->
+</div>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-content">
+            <a href="#home">
+                <img src="resimler/Logo_Emojili_Buyuk.png" alt="Tırtıl" class="logo">
+            </a>
+            <div class="nav-links" id="navLinks">
+                <a href="#home" class="nav-item" onclick="showSection('home')">ANA SAYFA</a>
+                <a href="#portfolio" class="nav-item" onclick="showSection('portfolio')">PROJELER</a>
+                <a href="#about" class="nav-item" onclick="showSection('about')">HAKKIMIZDA</a>
+                <a href="#contact" class="nav-item" onclick="showSection('contact')">İLETİŞİM</a>
+            </div>
+    
+            <div class="nav-right">
+                <!-- Hamburger Menü Butonu -->
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+    
+
+<!-- Mobil Menü - Güncellenmiş -->
+<div class="mobile-menu" id="mobileMenu">
+    <div class="mobile-menu-header">
+        <img src="resimler/TIRTIL_LOGO_BEYAZ_E.png" alt="Tırtıl Tech Logo" class="mobile-menu-logo">
+        <button class="mobile-menu-close" id="mobileMenuClose">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+    <div class="mobile-menu-items">
+        <div class="mobile-menu-item">
+    <a href="#home" class="mobile-menu-link">ANA SAYFA</a>
+</div>
+        <!-- Hizmetlerimiz ve misyon vizyon kaldırıldı -->
+        <div class="mobile-menu-item">
+            <a href="#portfolio" class="mobile-menu-link">PROJELER</a>
+        </div>
+        <div class="mobile-menu-item">
+            <a href="#about" class="mobile-menu-link">HAKKIMIZDA</a>
+        </div>
+        <div class="mobile-menu-item">
+            <a href="#contact" class="mobile-menu-link">İLETİŞİM</a>
+        </div>
+        <div class="mobile-menu-item">
+            <a href="#contact" class="mobile-menu-link">TEKLİF AL</a>
+        </div>
+    </div>
+</div>
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <!-- Hareketli arka plan elementleri -->
+        <div class="floating-circle circle-1"></div>
+        <div class="floating-circle circle-2"></div>
+        <div class="floating-circle circle-3"></div>
+        <div class="moving-shape shape-1"></div>
+        <div class="moving-shape shape-2"></div>
+
+        <!-- Görsel container -->
+        <div class="image-container">
+            <div class="image-shadow"></div>
+            <img src="resimler/kod.jpg" alt="Dijital Çözümler" class="hero-image">
+        </div>
+
+<div class="container mx-auto px-4">
+    <div class="hero-content text-left">
+        <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold text-gray-900 mb-4 md:mb-6">
+            <span id="typed-text" class="text-green-600"></span>
+        </h1>
+        <p class="text-lg md:text-xl text-gray-700 mb-6 md:mb-8 leading-relaxed max-w-lg">
+            Tırtıl Tech ile yenilikçi çözümlerle dijital deneyimleri bir üst seviyeye taşıyın.Fikirlerinizi gerçeğe dönüştürelim!
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 sm:gap-6 button-group">
+            <a href="#contact" class="animated-button bg-green-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg text-lg font-semibold transition-all duration-300 hover:shadow-lg w-full sm:w-auto">
+                Başlayalım
+            </a>
+            <a href="#portfolio" class="border-2 border-green-600 text-green-600 px-6 sm:px-8 py-3 sm:py-4 rounded-lg text-lg font-semibold transition-all duration-300 hover:bg-green-600 hover:text-white w-full sm:w-auto">
+                Daha Fazlası!
+            </a>
+        </div>
+    </div>
+</div>
+    </section>
+    <!-- Çözüm Ortağımız Olan Teknolojiler -->
+    <section class="trusted-companies">
+        <div class="container">
+            <h2 class="title">Çözüm Ortağımız Olan Teknolojiler</h2>
+            <div class="slider-wrapper">
+                <div class="gradient-overlay-left"></div>
+                <div class="slider-container" id="slider">
+                    <!-- İlk set logolar -->
+                    <div class="company-logo">
+                        <img src="resimler/asp.net.png" alt="ASP.NET">
+                    </div>
+                    <div class="company-logo">
+                        <img src="resimler/mysql.png" alt="MySQL">
+                    </div>
+                    <div class="company-logo">
+                        <img src="resimler/googlemybusines.png" alt="Google My Business">
+                    </div>
+                    <div class="company-logo">
+                        <img src="resimler/jquery.png" alt="jQuery">
+                    </div>
+                    <div class="company-logo">
+                        <img src="resimler/partner.png" alt="Partner">
+                    </div>
+                    <div class="company-logo">
+                        <img src="resimler/html.png" alt="HTML">
+                    </div>
+                    <div class="company-logo">
+                        <img src="resimler/css.png" alt="CSS">
+                    </div>
+                    <div class="company-logo">
+                        <img src="resimler/c++.png" alt="C++">
+                    </div>
+                    <div class="company-logo">
+                        <img src="resimler/flutter.png" alt="Flutter">
+                    </div>
+                    <div class="company-logo">
+                        <img src="resimler/java.png" alt="Java">
+                    </div>
+                    <div class="company-logo">
+                        <img src="resimler/php.png" alt="PHP">
+                    </div>
+                    <div class="company-logo">
+                        <img src="resimler/js.png" alt="JavaScript">
+                    </div>
+                    <div class="company-logo">
+                        <img src="resimler/bootstrap.png" alt="Bootstrap">
+                    </div>
+                    
+                    <!-- Tekrarlanan logolar -->
+                    <div class="company-logo">
+                        <img src="resimler/dart.png" alt="Dart">
+                    </div>
+                    <div class="company-logo">
+                        <img src="resimler/html.png" alt="HTML">
+                    </div>
+                    <div class="company-logo">
+                        <img src="resimler/css.png" alt="CSS">
+                    </div>
+                    <div class="company-logo">
+                        <img src="resimler/c++.png" alt="C++">
+                    </div>
+                    <div class="company-logo">
+                        <img src="resimler/flutter.png" alt="Flutter">
+                    </div>
+                    <div class="company-logo">
+                        <img src="resimler/java.png" alt="Java">
+                    </div>
+                    <div class="company-logo">
+                        <img src="resimler/php.png" alt="PHP">
+                    </div>
+                    <div class="company-logo">
+                        <img src="resimler/js.png" alt="JavaScript">
+                    </div>
+                    <div class="company-logo">
+                        <img src="resimler/bootstrap.png" alt="Bootstrap">
+                    </div>
+                </div>
+                <div class="gradient-overlay-right"></div>
+            </div>
+        </div>
+    </section>
+
+<!-- Video Arkaplan -->
+<section class="video-section">
+    <video autoplay muted loop playsinline>
+        <source src="video/1.mp4" type="video/mp4">
+        Tarayıcınız video etiketini desteklemiyor.
+    </video>
+
+    <!-- İçerik -->
+    <div class="content">             
+        <div class="max-w-2xl">                 
+            <blockquote class="text-2xl md:text-4xl text-white font-bold leading-normal whitespace-pre-line">
+                Size uygun yazılım paketlerimizi seçebilir veya ihtiyacınıza özel bir sistemi birlikte oluşturabiliriz.                
+            </blockquote>              
+            <p class="text-white text-lg md:text-xl font-light mt-2">- Tırtıl Tech -</p>          
+        </div>         
+    </div>
+</section>
+
+   <!-- Portfolio Section -->
+<!-- Yenilenmiş Portfolio Section HTML -->
+<section id="portfolio" class="portfolio-section">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title">Başarı Hikayelerimiz</h2>
+            <p class="section-description">
+                İşletmelerin dijital varlıklarını dönüştürmelerine ve olağanüstü sonuçlar elde etmelerine nasıl yardımcı olduğumuzu keşfedin.
+            </p>
+        </div>
+
+        <div class="carousel-wrapper">
+            <button class="carousel-button prev" aria-label="Önceki Projeler">❮</button>
+            <div class="carousel-container">
+                <div class="carousel-track">
+                    <!-- Proje Kartları -->
+                    <div class="project-card">
+                        <img src="resimler/proje5.png" alt="Kripto Ticaret Uygulaması">
+                        <div class="project-content">
+                            <h3 class="project-title"> ShopEasy | E-Ticaret Web Sitesi</h3>
+                            <p class="project-description">Çevrimiçi alışveriş siteleri için kullanıcı dostu ve satış odaklı tasarım.
+
+                            </p>
+                        </div>
+                    </div>
+                
+                    <div class="project-card">
+                        <img src="resimler/proje4.png" alt="Akıllı Ev Sistemi">
+                        <div class="project-content">
+                            <h3 class="project-title">ARCH | Modern Mimari Web Sitesi</h3>
+                            <p class="project-description">Mimarlık firmaları, tasarım stüdyoları ve portfolyo siteleri için minimal ve şık tasarım.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card">
+                        <img src="resimler/proje3.png" alt="Yapay Zeka Analiz Paneli">
+                        <div class="project-content">
+                            <h3 class="project-title">Müzik | Mobil Uygulaması</h3>
+                            <p class="project-description">Panel Destekli aktif çalışan bir Müzik Uygulaması.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card">
+                        <img src="resimler/proje2.jpg" alt="Mobil Bankacılık Uygulaması">
+                        <div class="project-content">
+                            <h3 class="project-title"> Sell Market | Mobil Uygulaması</h3>
+                            <p class="project-description">Güvenli ve Aktif özellikte bir Market Uygulaması.</p>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <img src="resimler/proje6.png" alt="Kurumsal İnternet Sistemi">
+                        <div class="project-content">
+                            <h3 class="project-title">DailyPost | Blog Web Sitesi</h3>
+                            <p class="project-description">İçerik odaklı web siteleri ve kişisel bloglar için okunaklı tasarım.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <img src="resimler/proje1.png" alt="E-ticaret Platformu">
+                        <div class="project-content">
+                            <h3 class="project-title"> e-Food | Mobil Uygulaması </h3>
+                            <p class="project-description">Gelişmiş özelliklere sahip komple bir yemek mobil uygulama çözümü.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card">
+                        <img src="resimler/proje7.png" alt="Öğrenme Yönetim Sistemi">
+                        <div class="project-content">
+                            <h3 class="project-title">TaskMaster | Mobil Uygulama</h3>
+                            <p class="project-description">Mobil uygulamalar, SaaS ürünleri ve yazılım tanıtımları için çarpıcı tasarım.
+
+                            </p>
+                        </div>
+                    </div>                
+                </div>
+            </div>
+            <button class="carousel-button next" aria-label="Sonraki Projeler">❯</button>
+            <!-- Gösterge noktaları JavaScript tarafından eklenecek -->
+        </div>
+    </div>
+</section>
+
+<!-- Bize Ulaşın Bölümü -->
+<section class="cta-section">
+    <div class="cta-text">
+        <span class="company-name">Tırtıl Tech</span> olarak tüm sorularınızı cevaplıyor ve çözümler üretiyoruz...
+    </div>
+    <div class="cta-button-wrapper">
+        <a href="#contact" class="cta-button">Bize Ulaşın</a>
+    </div>
+    <div class="magic"></div>
+</section>
+
+    <!-- Yorum Bölümü -->
+    <section class="testimonials-section py-20 relative overflow-hidden">
+        <!-- Arka Plan Animasyonu -->
+        <div class="testimonials-bg-animation">
+            <div class="wave wave1"></div>
+            <div class="wave wave2"></div>
+            <div class="wave wave3"></div>
+            <div class="floating-shape shape1"></div>
+            <div class="floating-shape shape2"></div>
+            <div class="floating-shape shape3"></div>
+        </div>
+        
+        <div class="container mx-auto px-6 relative z-10">
+            <!-- Başlık Alanı -->
+            <div class="section-header text-center mb-16" data-aos="fade-up">
+                <h2 class="section-title text-4xl md:text-5xl font-bold mb-4">
+                    <span class="text-gradient">Müşterilerimizin</span> Hikayeleri
+                </h2>
+                <p class="max-w-2xl mx-auto text-gray-600 text-lg">
+                    Başarılı projelerimiz ve memnun müşterilerimizle gurur duyuyoruz. İşte onların Tırtıl Tech deneyimi...
+                </p>
+            </div>
+            
+            <!-- Yeni Carousel Tasarımı -->
+            <div class="testimonials-carousel" data-aos="fade-up" data-aos-delay="200">
+                <div class="swiper-container">
+                    <div class="testimonial-wrapper">
+                        <!-- Testimonial Card 1 -->
+                        <div class="testimonial-card">
+                            <div class="card-top">
+                                <!-- Üst Görsel/Profil Alanı -->
+                                <div class="testimonial-profile">
+                                    <div class="avatar-container">
+                                        <img src="resimler/yorum2.jpeg" alt="Ahmet Yılmaz" class="avatar-img">
+                                        <div class="avatar-glow"></div>
+                                    </div>
+                                    <div class="profile-info">
+                                        <h4 class="name">Ahmet Yılmaz</h4>
+                                        <p class="position">CEO, Teknoloji Çözümleri</p>
+                                    </div>
+                                </div>
+                                <!-- Yıldız Değerlendirmesi - Animasyonlu -->
+                                <div class="rating-stars">
+                                    <div class="stars-container">
+                                        <span class="star active" data-rating="1"><i class="fas fa-star"></i></span>
+                                        <span class="star active" data-rating="2"><i class="fas fa-star"></i></span>
+                                        <span class="star active" data-rating="3"><i class="fas fa-star"></i></span>
+                                        <span class="star active" data-rating="4"><i class="fas fa-star"></i></span>
+                                        <span class="star active" data-rating="5"><i class="fas fa-star"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Yorum Metni -->
+                            <div class="testimonial-body">
+                                <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+                                <p class="testimonial-text">
+                                    "TIRTIL dijital varlığımızı tamamen dönüştürdü. Yenilikçi çözümleri sayesinde online gelirimizi %200 artırdık."
+                                </p>
+                                <div class="blob-decoration"></div>
+                            </div>
+                            
+                            <!-- Sonuç Göstergeleri -->
+                            <div class="result-indicators">
+                                <div class="result-badge">
+                                    <span class="result-icon"><i class="fas fa-chart-line"></i></span>
+                                    <span class="result-text">%200 Gelir Artışı</span>
+                                </div>
+                                <div class="result-badge">
+                                    <span class="result-icon"><i class="fas fa-tachometer-alt"></i></span>
+                                    <span class="result-text">3x Performans</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Testimonial Card 2 -->
+                        <div class="testimonial-card">
+                            <div class="card-top">
+                                <div class="testimonial-profile">
+                                    <div class="avatar-container">
+                                        <img src="resimler/yorum3.jpeg" alt="Ayşe Demir" class="avatar-img">
+                                        <div class="avatar-glow"></div>
+                                    </div>
+                                    <div class="profile-info">
+                                        <h4 class="name">Ayşe Demir</h4>
+                                        <p class="position">Pazarlama Direktörü</p>
+                                    </div>
+                                </div>
+                                <div class="rating-stars">
+                                    <div class="stars-container">
+                                        <span class="star active" data-rating="1"><i class="fas fa-star"></i></span>
+                                        <span class="star active" data-rating="2"><i class="fas fa-star"></i></span>
+                                        <span class="star active" data-rating="3"><i class="fas fa-star"></i></span>
+                                        <span class="star active" data-rating="4"><i class="fas fa-star"></i></span>
+                                        <span class="star active" data-rating="5"><i class="fas fa-star"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="testimonial-body">
+                                <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+                                <p class="testimonial-text">
+                                    "Ekibin ayrıntılara gösterdiği dikkat ve mükemmeliyetçi yaklaşımı projemizi büyük bir başarıya dönüştürdü. Kesinlikle tavsiye ediyorum!"
+                                </p>
+                                <div class="blob-decoration"></div>
+                            </div>
+                            
+                            <div class="result-indicators">
+                                <div class="result-badge">
+                                    <span class="result-icon"><i class="fas fa-users"></i></span>
+                                    <span class="result-text">%45 Müşteri Artışı</span>
+                                </div>
+                                <div class="result-badge">
+                                    <span class="result-icon"><i class="fas fa-mobile-alt"></i></span>
+                                    <span class="result-text">Mobil Uyumluluk</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        
+                        <!-- Testimonial Card 3 -->
+                        <div class="testimonial-card">
+                            <div class="card-top">
+                                <div class="testimonial-profile">
+                                    <div class="avatar-container">
+                                        <img src="resimler/yorum1.jpeg" alt="Mehmet Kaya" class="avatar-img">
+                                        <div class="avatar-glow"></div>
+                                    </div>
+                                    <div class="profile-info">
+                                        <h4 class="name">Mehmet Kaya</h4>
+                                        <p class="position">CTO, İnovasyon Laboratuvarı</p>
+                                    </div>
+                                </div>
+                                <div class="rating-stars">
+                                    <div class="stars-container">
+                                        <span class="star active" data-rating="1"><i class="fas fa-star"></i></span>
+                                        <span class="star active" data-rating="2"><i class="fas fa-star"></i></span>
+                                        <span class="star active" data-rating="3"><i class="fas fa-star"></i></span>
+                                        <span class="star active" data-rating="4"><i class="fas fa-star"></i></span>
+                                        <span class="star active" data-rating="5"><i class="fas fa-star"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="testimonial-body">
+                                <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+                                <p class="testimonial-text">
+                                    "TIRTIL ile çalışmak girişimimiz için bir dönüm noktası oldu. Beklentilerimizin çok ötesinde bir hizmet sundular."
+                                </p>
+                                <div class="blob-decoration"></div>
+                            </div>
+                            
+                            <div class="result-indicators">
+                                <div class="result-badge">
+                                    <span class="result-icon"><i class="fas fa-code"></i></span>
+                                    <span class="result-text">%70 Daha Hızlı</span>
+                                </div>
+                                <div class="result-badge">
+                                    <span class="result-icon"><i class="fas fa-shield-alt"></i></span>
+                                    <span class="result-text">Güvenli Altyapı</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Gezinme Noktaları -->
+                    <div class="testimonial-dots"></div>
+                    
+                    <!-- Kontrol Butonları -->
+                    <div class="testimonial-controls">
+                        <button class="control-btn prev-btn" aria-label="Önceki yorum">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button class="control-btn next-btn" aria-label="Sonraki yorum">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Çağrı Metni -->
+            <div class="text-center mt-12" data-aos="fade-up" data-aos-delay="300">
+                <a href="#contact" class="testimonial-cta">
+                    <span class="cta-text">Başarı hikayenizi birlikte yazalım</span>
+                    <span class="cta-icon"><i class="fas fa-arrow-right"></i></span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+
+<!-- Hakkımızda-->
+    <section id="about" class="py-20 bg-gradient-to-b from-green-25 to-green-150 relative overflow-hidden">
+        <!-- Arka Plan Şekilleri -->
+        <div class="shape shape-triangle shape-1"></div>
+        <div class="shape shape-triangle shape-2"></div>
+        <div class="shape shape-3"></div>
+        <div class="shape shape-4"></div>
+        <div class="shape shape-5"></div>
+        <div class="shape shape-6"></div>
+
+        <div class="container mx-auto px-6 relative z-10">
+            <h2 class="text-5xl font-extrabold text-center text-gray-900 mb-14" data-aos="fade-up">
+                Hakkımızda
+            </h2>
+            <div class="flex flex-col md:flex-row items-center">
+                <!-- Metin Alanı -->
+                <div class="md:w-1/2 pr-10" data-aos="fade-right">
+                    <div class="flex border-b-2 border-green-300 mb-8 relative">
+                        <button class="px-6 py-3 text-green-700 font-semibold border-b-4 border-green-600 tab-button active focus:outline-none transition-all duration-300" data-tab="mission">
+                            Misyonumuz
+                        </button>
+                        <button class="px-6 py-3 text-gray-600 font-semibold border-b-4 border-transparent tab-button focus:outline-none hover:text-green-700 transition-all duration-300" data-tab="vision">
+                            Vizyonumuz
+                        </button>
+                    </div>
+                    <div id="mission" class="tab-content active">
+                        <p class="text-gray-800 leading-relaxed text-lg">
+                            Tırtıl Tech olarak misyonumuz, teknolojinin gücünü kullanarak işletmelerin dijital dönüşümünü kolaylaştırmak ve müşterilerimize yenilikçi, kullanıcı dostu çözümler sunmaktır. Her projede mükemmelliği hedefleyerek, müşterilerimizin ihtiyaçlarını anlayıp onlara özel çözümler geliştiriyoruz.
+                            
+                        </p>
+                    </div>
+                    <div id="vision" class="tab-content hidden">
+                        <p class="text-gray-800 leading-relaxed text-lg">
+                           Vizyonumuz, insanların hayatlarını kolaylaştıran ve işletmelerin verimliliğini artıran yazılım çözümleriyle global ölçekte tanınan bir teknoloji markası haline gelmektir. Yeniliğe, gelişime ve mükemmelliğe odaklanarak sektörde fark yaratan ilerici bir teknoloji lideri olmayı amaçlıyoruz.
+                        </p>
+                    </div>
+                </div>
+                <!-- Görsel Alanı -->
+                <div class="md:w-1/2 mt-10 md:mt-0 flex justify-center" data-aos="fade-left">
+                    <img src="resimler/full-stack-removebg-preview.png" alt="Ekibimiz" class="rounded-2xl shadow-xl transform hover:scale-105 transition-all duration-500">
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Contact Section -->
+    <section id="contact" class="relative py-24 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white">
+        <div class="container mx-auto px-6 relative z-10 mb-20">
+             <!-- Formu yukarı almak için margin-bottom eklendi -->
+            <h2 class="text-5xl font-extrabold text-center mb-14" data-aos="fade-up">
+                İletişim Formu
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <!-- İletişim Bilgileri -->
+                <div class="space-y-6" data-aos="fade-right">
+                    <h3 class="text-3xl font-semibold text-green-400">İletişim Bilgilerimiz</h3>
+                    <!-- İstanbul için konum ikonu -->
+<div class="bg-white/10 backdrop-blur-lg p-6 rounded-xl shadow-lg flex items-center space-x-4 transition-all duration-300 hover:translate-y-1">
+    <svg class="w-8 h-8 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+    </svg>
+    <span class="text-lg text-gray-200">İstanbul, Türkiye / Levent, Talatpaşa Cd Şair Çelebi sok No 9, Ortabayır Mah, 34180</span>
+</div>
+
+<!-- Telefon numaraları için container -->
+<div class="bg-white/10 backdrop-blur-lg p-6 rounded-xl shadow-lg transition-all duration-300 hover:translate-y-1">
+    <div class="flex items-center mb-2">
+        <svg class="w-8 h-8 text-green-400 flex-shrink-0 mr-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+        </svg>
+        <div class="flex flex-col">
+            <span class="text-lg text-gray-200 mt-1">+90 (541) 104 49 01   |   Ahmet Ünver</span>
+            <span class="text-lg text-gray-200">+90 (539) 229 00 58   |   Yuşa Değer</span>
+        </div>
+    </div>
+</div>
+<!-- E-posta için e-posta ikonu -->
+<div class="bg-white/10 backdrop-blur-lg p-6 rounded-xl shadow-lg flex items-center space-x-4 transition-all duration-300 hover:translate-y-1">
+    <svg class="w-8 h-8 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+    </svg>
+    <span class="text-lg text-gray-200">tirtiltech@gmail.com</span>
+</div>
+                </div>
+                <!-- Form Alanı -->
+                <form class="space-y-6 bg-white/10 backdrop-blur-lg p-8 rounded-xl shadow-xl" data-aos="fade-right">
+                    <form action="mail_handler.php" method="POST">
+                    <h3 class="text-3xl font-semibold text-green-400 mb-4">Bize Mesaj Gönderin</h3>
+                    <div>
+                        <label class="block text-gray-300 mb-2" for="name">Adınız</label>
+                        <input type="text" id="name" placeholder="Adınızı girin" required aria-label="Name" class="w-full px-4 py-3 rounded-lg bg-gray-900 text-white border border-transparent focus:border-green-400 focus:ring-green-400 focus:outline-none transition-all duration-300">
+                    </div>
+                    <div>
+                        <label class="block text-gray-300 mb-2" for="email">E-posta</label>
+                        <input type="email" id="email" placeholder="E-posta adresinizi girin" required aria-label="Email" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" class="w-full px-4 py-3 rounded-lg bg-gray-900 text-white border border-transparent focus:border-green-400 focus:ring-green-400 focus:outline-none transition-all duration-300">
+                    </div>
+                    <div>
+                        <label class="block text-gray-300 mb-2" for="message">Mesajınız</label>
+                        <textarea id="message" rows="4" placeholder="Mesajınızı girin" required aria-label="Message" class="w-full px-4 py-3 rounded-lg bg-gray-900 text-white border border-transparent focus:border-green-400 focus:ring-green-400 focus:outline-none transition-all duration-300"></textarea>
+                    </div>
+                    <button type="submit" class="w-full bg-green-500 text-white px-8 py-3 rounded-lg hover:bg-green-600 transform hover:scale-105 transition-all duration-300">
+                        Mesaj Gönder
+                    </button>
+                    <!-- Başarı mesajı için gizli bir div -->
+                    <div id="success-message" class="hidden text-green-400 text-center mt-4">Mesajınız başarıyla gönderildi!</div>
+                </form>
+            </div>
+        </div>
+        <div class="absolute top-0 left-0 w-full h-full bg-green-500 opacity-10 mix-blend-soft-light pointer-events-none"></div>    
+        </section> 
+ <!-- Sayfanın başına dönüş oku -->
+<div id="back-to-top" class="fixed bottom-6 right-6 z-50 opacity-0 transition-opacity duration-300">
+    <a href="#home" class="bg-green-600 text-white p-3 rounded-full shadow-lg hover:bg-green-700 transition-all duration-300 hover:scale-110 flex items-center justify-center">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+        </svg>
+    </a>
+</div>
+    
+<footer class="relative bg-gray-900 text-white py-8 overflow-hidden">
+    <!-- Particles.js Efekti -->
+    <div id="footer-particles" class="absolute top-0 left-0 w-full h-full"></div>
+
+    <div class="container mx-auto px-6 relative z-10">
+        <!-- Grid yapısını flex ile değiştiriyorum ve justify-center ekliyorum -->
+        <div class="flex flex-wrap justify-center gap-8">
+            <!-- Logo & Hakkında -->
+            <div data-aos="fade-up" class="glass p-6 rounded-lg text-center md:text-left w-full md:w-64">
+                <h4 class="text-3xl font-extrabold text-green-400 mb-4">TIRTIL</h4>
+                <p class="text-gray-300 leading-relaxed">
+                    Yenilikçi teknoloji çözümleriyle işletmeleri dönüştürüyoruz.
+                </p>
+            </div>
+            
+            <!-- İletişim -->
+            <div data-aos="fade-up" class="glass p-6 rounded-lg text-center md:text-left w-full md:w-64">
+                <h4 class="text-2xl font-semibold text-green-400 mb-4">İletişim</h4>
+                <ul class="space-y-4 text-gray-300">
+                    <li class="flex items-center hover:text-green-400 transition-all duration-300 justify-center md:justify-start">
+                        <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+                        </svg>
+                        +90 (539) 229 00 58
+                    </li>
+                    <li class="flex items-center hover:text-green-400 transition-all duration-300 justify-center md:justify-start">
+                        <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                        </svg>
+                        tirtiltech@gmail.com 
+                    </li>
+                    <li class="flex items-center hover:text-green-400 transition-all duration-300 justify-center md:justify-start">
+                        <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+                        </svg>
+                        +90 (541) 104 49 01 
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- Sosyal Medya -->
+            <div data-aos="fade-up" class="glass p-6 rounded-lg text-center md:text-left w-full md:w-64">
+                <h4 class="text-2xl font-semibold text-green-400 mb-4">Bizi Takip Edin</h4>
+                <div class="flex flex-wrap gap-4 justify-center md:justify-start items-center">
+                    <a href="https://www.instagram.com/tirtiltech/" class="bg-pink-500 text-white p-3 rounded-lg hover:scale-110 transition-transform duration-300">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M7.5 2h9A5.5 5.5 0 0 1 22 7.5v9A5.5 5.5 0 0 1 16.5 22h-9A5.5 5.5 0 0 1 2 16.5v-9A5.5 5.5 0 0 1 7.5 2Zm4.5 5.5A4.5 4.5 0 1 0 16.5 12 4.5 4.5 0 0 0 12 7.5Zm0 1.5A3 3 0 1 1 9 12a3 3 0 0 1 3-3Zm4-1.5a1 1 0 1 0 1 1 1 1 0 0 0-1-1Z"/>
+                        </svg>
+                    </a>
+                    <a href="mailto:tirtiltech@gmail.com" class="bg-red-600 text-white p-3 rounded-lg hover:scale-110 transition-transform duration-300">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 12.713 1.5 5.625V18a2 2 0 0 0 2 2h17a2 2 0 0 0 2-2V5.625l-10.5 7.088ZM22.5 4.125a1.5 1.5 0 0 0-2.31-1.237L12 8.287 3.81 2.888A1.5 1.5 0 0 0 1.5 4.125V5.25l10.5 7.088L22.5 5.25V4.125Z"/>
+                        </svg>
+                    </a>
+                    <a href="https://www.tiktok.com/@tirtiltech" class="bg-black text-white p-3 rounded-lg hover:scale-110 transition-transform duration-300">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2h3a4 4 0 0 0 4 4v3a7 7 0 0 1-4-1V14a5 5 0 1 1-5-5h1v3h-1a2 2 0 1 0 2 2V2Z"/>
+                        </svg>
+                    </a>
+                </div>
+                <div id="particles-js"></div>
+            </div>
+        </div>
+        <div class="border-t border-gray-800 mt-8 pt-4 text-center text-gray-400">
+            <p>&copy; 2025 TIRTIL. Tüm hakları saklıdır.</p>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/phaser@3.54.0/dist/phaser.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js"></script>
+    <script src="script.js"></script>
+        
+</body>
+</html>
