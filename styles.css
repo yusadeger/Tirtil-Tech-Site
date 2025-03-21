@@ -164,7 +164,7 @@
 
 /* Companies Section */
 .trusted-companies {
-    padding: 1.5rem 0;
+    padding: 4rem 0;
     background: white;
     overflow: hidden;
 }
@@ -191,9 +191,20 @@
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
-    width: 400px;  /* Çizgi uzunluğu */
-    height: 2px;   /* Çizgi kalınlığı */
-    background-color: #333;  /* Çizgi rengi */
+    width: 400px;
+    height: 2px;
+    background-color: #333;
+}
+
+@media (max-width: 768px) {
+    .title {
+        padding-bottom: 15px;
+        border-bottom: 2px solid #333; /* Çizgiyi ::after yerine border olarak ekle */
+    }
+    
+    .title::after {
+        display: none; /* Mobilde eski çizgiyi kaldır */
+    }
 }
 
 .slider-wrapper {
