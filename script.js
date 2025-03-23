@@ -109,9 +109,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Ana sayfa Typed.js animasyonu
     new Typed('#typed-text', {
         strings: [
-            'Tek Çözüm,',
-            'Tutkuya Birlikte,',
             'Tam Zamanında.',
+            'Tırtıl ile,',
+            'Tek Çözüm,',
         ],
         typeSpeed: 50,
         backSpeed: 30,
